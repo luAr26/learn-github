@@ -5,4 +5,4 @@ The only reason this project exists is to give the fine viewers a means to lerni
 This is another line for the README file.
 New modification to the README file.
 
-All rights reserved. April 2014
+All rights reserved. 28 April 2014
