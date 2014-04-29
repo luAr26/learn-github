@@ -1,0 +1,112 @@
+Lesson 4
+
+- COMMAND: git init : initialize as a git repository
+*** .git/config : the file where all options are set for the repository
+
+Lesson 5
+- git status : status of repository
+- git status -s : run this for a more compressed status message
+
+*** git records changes in content, not specifically changes in files
+- git add <filename> : add a file for git to track (add the changes to the file to the staging area)
+- git add . : adds everything from the current folder to the staging area
+
+Lesson 6
+- git commit
+- git commit -a
+- git commit -m 'this is some message'
+- git commit -am 'some other message'
+
+Lesson 7
+- create a list of files and folders for git to ignore
+- create a .gitignore file and list all the files and folders for git to ignore
+- E.g.
+.DS_Store
+tmp
+*.swp~
+test/*.txt
+!test/master.txt
+
+Lesson 8
+- staging area is a unique feature of git
+- the staging area is the index file from the .git directory
+- the staging area allows you to pick what you want to commit and commit it.
+- the .git folder is actually the git repository, there is where all the magic happens
+
+Lesson 9
+- inside look at how git actually works
+- how git stores content and how it tracks the versions of the code that you write
+
+*** HOW IT STORES THE CONTENT
+- git has a special way to store file and a special way to store directories
+- git uses a blob to store the content of the file
+
+- a blob is a git object (this objects are referenced by a sha-1 hash)
+- git uses different kind of objects to store content in the git repository and this objects are referenced by a sha-1 hash 
+- to hash something it's to convert its content into a 40 character string and this 40 character string is going to be unique to the content that was passed to the hash function, in fact if we change a single character in that content we will get a different sha-1 hash. SHA-1 is the hashing alogorithm that git uses. So it's this hash that uniquely identifies every piece of content within you git repository. This hashs are used to store the git objects in the git object database.
+
+- if you open up .git folder and look inside the objects folder (git splits up that hash into, part of it is used for a folder name, part of it's used for an actual file and that hash is used to uniquely identify the contents of this files).
+
+- What is actually in the files with hashes as file names? It's not actually the plain text content of the files, this have actually been compressed using a compression library called zlib and is this compression that keeps the git repository to a resonable size.
+
+- a blob is one of this types of git objects that are stored as a hash within those files
+- inside a blob is stored a bit of header information and the actual contents of one of our files compressed using the zlib compression library
+
+- a tree object is used to store directories
+- the tree object is created in a similar way to the blob object in that it's bunch of content that is hashed and that hash is the id for the file that has the compressed version of that content in it, however the content that creates a tree is actually a little different than the blob content, first of all there is the header information and then for every file and directory inside of that directory there are 4 things listed:
+> file permissions
+> object type (blob or tree)
+> sha-1 hash that identifies that file of directory
+> the file and directory name, the name that you give it
+
+- a commit object is used to store 'snapshots' that we take of our project as times goes on
+- a commit is created in exactly the same way as the other objects as it is an object, it's the right content hashed that hash becomes the identifier and the file name and the contents the we originally had is compressed and put inside that file.
+- What contents are we hashing in the case of a commit? 
+> author information
+> commiter information
+> commit message 
+> sha-1 hash for any of the parent commits (the commit that was made before this commit). As we are getting into branching and merging you can actually have multiple parents of a given commit, when you have to branches that you are merging together that merge commit actually has to parent commits, so there maybe more than one parent sha-1 within a commit objects.
+> sha-1 of the tree that the commit points to. A commit object it's actually pointing the tree object that represents the latest changes, or the changes that were made for that given commit, but the commit object itself doesn't actually hold the current content changes that you actually made it just point to a tree which than points to those changes. 
+
+*** HOW DOES GIT TRACKS CHANGES
+
+*** HOW TO REFERENCE DIFFERENT COMMITS
+- by sha-1 hash
+- branches : they are a way to branch off and experiment with something different in your code without hurting the main branch. Git keeps a reference for every branch, that reference points to the latest commit that you made on that specific branch
+- HEAD - points to the latest commit on the current branch
+- ancestor references(~). Use ^ to get the parents of a merge commit
+
+Lesson 10
+
+- git diff <filename> : shows diff of what is staged and what is modified but unstaged 
+- will display in unified diff format (a patch) what code or content you've changed in your project since the last commit that are not yet staged for the next commit snapshot
+- git diff --staged <filename> (same as --chached): difference between the staging area and the latest commit
+- git diff HEAD <filename> : comparison between what's in the working directory and HEAD's version of the <filename> file.
+- git diff --stat : gives us a summary of the changes instead of a full diff
+
+Lesson 11
+
+- git log : view history
+- git log --stat : add a summary to the changes
+- git log --online : compact version
+- git log --graph
+- git log --pretty="%h, %cn, %cr", more placeholders here: http://git-scm.com/docs/git-log
+- run gitk - for the ui version
+
+Lesson 12
+
+- git branch : list, create and manage working contexts
+- git branch <branchname> : create a new branch
+- git checkout <branchname> : switch to <branchname>
+- git checkout -b <branchname> : shortcut for creating branches, it will create and switch to <branchname>
+
+Lesson 13
+
+- git merge <branchname> - merges <branchname> into the branch that we're currently on
+- git branch -d <branchname> - deletes <branchname>
+- git rebase <branchname>
+
+Lesson 14
+- create github account
+- ssh-keygen -t rsa -C 'your email address' : generate public/private rsa key pair
+- ssh -T git@github.com : connect to github via ssh
