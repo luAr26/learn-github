@@ -110,3 +110,5 @@ Lesson 14
 - create github account
 - ssh-keygen -t rsa -C 'your email address' : generate public/private rsa key pair
 - ssh -T git@github.com : connect to github via ssh
+- git remote add origin <link>
+- git push -u origin master
