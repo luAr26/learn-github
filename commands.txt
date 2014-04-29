@@ -123,3 +123,42 @@ Lesson 16
 - <link> is the link to the repository
 - git pull to add the changes from the remote repository to our local repository
 - split the pull into 2 separate steps: git fetch then git merge origin/master
+
+Lesson 17
+- github pages
+
+Lesson 18
+- git add -i : git interactive add
+- git add -p : shortcut to patch
+
+Lesson 19
+- git stash
+- git stash list : give us a list of all the bits that we've stashed
+- git stash save 'enter your message'
+- git stash apply : it's going to take the latest stash and apply those changes to the working directory
+- git stash apply <nameofstash> : apply a specific stash to the working directory
+- the apply command leaves the stash on the stash stack
+- git stash pop : take the last stash off and apply it to the working directory
+- git stash pop <nameofstash> 
+- git stash drop
+
+Lesson 20
+- creating aliases
+- git config --globa alias.s status :created an alias for the status command
+
+Lesson 21
+- dealing with merging conflicts
+- a conflict happens when the same content has been change on both of the branches you want to merge
+
+Lesson 22
+- GUIS
+- https://mac.github.com/
+- https://windows.github.com/
+- http://www.git-tower.com/
+
+Lesson 23
+- customize your prompt with vcprompt: https://github.com/djl/vcprompt
+
+Additional resources to learning git
+- http://git-scm.com/documentation
+- http://git-scm.com/book
