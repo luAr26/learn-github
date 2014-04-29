@@ -112,3 +112,12 @@ Lesson 14
 - ssh -T git@github.com : connect to github via ssh
 - git remote add origin <link>
 - git push -u origin master
+
+Lesson 15
+- github tour
+
+Lesson 16
+- a remote repository is just a reference to another repository, usually right one that you have access to.
+- git remote add <name> <link>
+- <name> is the unique name that we want to give to our remote repository, defaults to origin
+- <link> is the link to the repository
